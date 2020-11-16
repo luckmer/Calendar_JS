@@ -9,19 +9,17 @@ body {
 }
 
 .container{
-    position:absolute; 
-    transform:translate(-50%, -50%); 
-    top:32%; 
-    left:50%; 
-    width:50%;
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%,-50%); 
 }
 
 .calendar-base {
-    background-color: white;
     position: relative;
     color: black;
     width: 900px;
-    height: 500px;
+    height: 670px;
     border-radius: 20px;
 }
 
@@ -63,12 +61,19 @@ body {
 }
 
 .month-hover{
-    margin: 0 10px 0 10px ;
+    border: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 32px;
+    width: 10px;
+    height: 10px;
 }
 .months {
     color: #AAAAAA;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     position: relative;
     top: 90px;
@@ -88,12 +93,12 @@ body {
     position: relative;
     top: 90px;
     width: 100%;
+    border: 1px solid black;
 }
 
 .days {
     color: black;
     font-weight: bold;
-    display: flex;
     flex-flow: row wrap;
     justify-content: center;
     position: relative;
@@ -104,17 +109,27 @@ body {
     font-weight: bold;
     color: lightslategrey;
 }
-
-.first-week {
+.days td{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid lightgrey;
+    border: 1px solid white;
     border-radius: 5px;
     margin: 5px;
     padding: 32px;
     width: 10px;
     height: 10px;
+}
+
+.Head{
+    width: 100%;
+    height: 100%;
+}
+tr{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
 }
 
 .Today{
@@ -155,9 +170,17 @@ body {
 }
 
 .bold {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 32px;
+    width: 10px;
+    height: 10px;
     color: black;
-    cursor: pointer;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #text{
