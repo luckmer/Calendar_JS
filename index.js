@@ -23,14 +23,7 @@ document.addEventListener("DOMContentLoaded", () =>{
             DisplayDays(indexMonth, indexYear);
             DisplayCurrentDay(indexMonth, indexYear);
         });
-        YearSelectedValue.addEventListener("change", e =>{
-            currentYear = parseInt(e.target.value);
-            month = indexMonth;
-            year = currentYear;
-            indexYear = currentYear;
-            DisplayDays(indexMonth, indexYear);
-            DisplayCurrentDay(indexMonth, indexYear);
-        });
+
         
         DecreaseDate.addEventListener("click", () =>{
             month--
@@ -69,8 +62,10 @@ document.addEventListener("DOMContentLoaded", () =>{
                 else {
                     let cell = document.createElement("td");
                     let cellText = document.createTextNode(date);
-                    if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth())
+                    if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
                         cell.classList.add("first-day");
+                        console.log(now.getMonth());
+                    }
                     cell.appendChild(cellText);
                     row.appendChild(cell);
                     date++;
@@ -147,10 +142,18 @@ document.addEventListener("DOMContentLoaded", () =>{
             YearSelectedValue.appendChild(option);
         }
 
+        YearSelectedValue.addEventListener("change", e =>{
+            currentYear = parseInt(e.target.value);
+            month = indexMonth;
+            year = currentYear;
+            indexYear = currentYear;
+            DisplayDays(indexMonth, indexYear);
+            DisplayCurrentDay(indexMonth, indexYear);
+        });
+
     };
     
-    const GlobalActualDate = (month, year) =>
-    {
+    const GlobalActualDate = (month, year) =>{
         let indexMonth = month;
         let indexYear = year;
         return { indexMonth, indexYear };
