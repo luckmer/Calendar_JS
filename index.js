@@ -16,12 +16,22 @@ document.addEventListener("DOMContentLoaded", () =>{
     
     const ControlButtons = () =>{
         let { indexMonth, indexYear } = GlobalActualDate(month, year);
-        TodayData.addEventListener("click", () =>{
+        TodayData.addEventListener("click", () =>
+        {
             month = indexMonth;
             year = indexYear;
             DisplayDays(indexMonth, indexYear);
             DisplayCurrentDay(indexMonth, indexYear);
         });
+        YearSelectedValue.addEventListener("change", e =>{
+            currentYear = parseInt(e.target.value);
+            month = indexMonth;
+            year = currentYear;
+            indexYear = currentYear;
+            DisplayDays(indexMonth, indexYear);
+            DisplayCurrentDay(indexMonth, indexYear);
+        });
+        
         DecreaseDate.addEventListener("click", () =>{
             month--
             if (month <= 0) {
@@ -51,28 +61,23 @@ document.addEventListener("DOMContentLoaded", () =>{
     const DisplayDays = (month, year) =>{
         let { firstDay, date, daysInMonth } = ClearAndCreateNewDate(year, month, Days);
         for (let i = 0; i < 6; i++) {
+            let row = document.createElement("tr");
+            row.classList.add("Head")
             for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDay) {
-                    let cell = document.createElement("td");
-                    let cellText = document.createTextNode("data");
-                    cell.appendChild(cellText);
-                };
-                if (date > daysInMonth) break;
+                if (i === 0 && j < firstDay) {[]}
+                else if (date > daysInMonth) break;
                 else {
-                    let cell = document.createElement("span");
+                    let cell = document.createElement("td");
                     let cellText = document.createTextNode(date);
-                    if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
-                        let weekdayName = daylist[now.getDay()]
-                        cell.textContent = `${weekdayName} `;
+                    if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth())
                         cell.classList.add("first-day");
-                    }
-                    cell.classList.add("first-week");
                     cell.appendChild(cellText);
-                    Days.appendChild(cell);
+                    row.appendChild(cell);
                     date++;
-                };
-            };
-        };
+                }
+            }
+            Days.appendChild(row);
+        }
         AddTask();
     };
 
@@ -86,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () =>{
     };
 
     const  DaysContext = () => {
-        
         for (let i = 0; i < daylist.length; i++) {
             const Li = document.createElement("span");
             Li.innerText = daylist[i];
@@ -102,9 +106,7 @@ document.addEventListener("DOMContentLoaded", () =>{
         let minute = now.getMinutes();
         let second = now.getSeconds();
         let prepand = (hour >= 12) ? " PM " : " AM ";
-        
         hour = (hour >= 12) ? hour - 12 : hour;
-        
         if (hour === 0 && prepand === ' PM ') {
             if (minute === 0 && second === 0) {
                 hour = 12;
@@ -123,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () =>{
                 prepand = ' AM';
             };
         };
-
         Hour.textContent = ` Current Time ${ hour }  ${ minute }  ${ prepand }`;
     };
 
@@ -146,24 +147,17 @@ document.addEventListener("DOMContentLoaded", () =>{
             YearSelectedValue.appendChild(option);
         }
 
-        YearSelectedValue.addEventListener("change", e =>{
-            currentYear = parseInt(e.target.value);
-            month = indexMonth;
-            indexYear = currentYear
-            DisplayDays(indexMonth, indexYear);
-            DisplayCurrentDay(indexMonth, indexYear);
-        });
-
     };
     
-    const GlobalActualDate = (month, year) =>{
+    const GlobalActualDate = (month, year) =>
+    {
         let indexMonth = month;
         let indexYear = year;
         return { indexMonth, indexYear };
     };
     
     const ClearAndCreateNewDate = (year, month, Days) =>{
-        let firstDay = new Date(year, month, 1).getDay();
+        let firstDay = new Date(year, month, 0).getDay();
         let daysInMonth = DaysInMonth(month, year);
         Days.innerHTML = "";
         let date = 1;
