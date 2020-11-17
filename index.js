@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () =>{
                     let cellText = document.createTextNode(date);
                     if (date === now.getDate() && year === now.getFullYear() && month === now.getMonth()) {
                         cell.classList.add("first-day");
-                        console.log(now.getMonth());
                     }
                     cell.appendChild(cellText);
                     row.appendChild(cell);
@@ -77,10 +76,14 @@ document.addEventListener("DOMContentLoaded", () =>{
     };
 
     const AddTask = () => {
-        const All = document.querySelectorAll(".first-week");
+        const All = document.querySelectorAll("td");
         All.forEach(a =>{
             a.addEventListener("click", () =>{
-                a.classList.add("toggle");
+                if (a.classList.value === "") {
+                    a.classList.add("toggle");
+                } else {
+                    a.classList.remove("toggle");
+                }
             });
         });
     };
@@ -150,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () =>{
             DisplayDays(indexMonth, indexYear);
             DisplayCurrentDay(indexMonth, indexYear);
         });
-
     };
     
     const GlobalActualDate = (month, year) =>{

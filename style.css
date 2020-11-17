@@ -198,5 +198,10 @@ tr{
     width: 90px;
 }
 .toggle{
-    border: 1px solid red;
+    background-color: lightblue;
+    color: white;
+}
+.toggle td{
+    border: 1px solid lightblue;
+
 }
